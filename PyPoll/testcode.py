@@ -19,14 +19,25 @@ for i in range(len(test_list)):
 import os
 import csv
 
-poll_csv = os.path.join("Resources", "election_data2.csv")
-os.listdir()
+list1 = ["moe", "larry", "curly"]
+#val = "moe"
 
+# stole this from geeksforgeeks.org
+def check(list1, val): 
+      
+    # traverse in the list 
+    for x in list1: 
+  
+        # compare with all the values 
+        # with val 
+        if val == x: 
+            return False 
+    return True
 
+val = input("put a stooge in?")
 
-#poll_csv = os.path.join("Resources", "election_data.csv")
-# line should be budget_csv = os.path.join("..", "Resources", "budget_data.csv")
-#with open(poll_csv, "r") as csv_file:
-
-with open(poll_csv, "r") as csv_file:
-    x=0
+if (check(list1,val)):
+    print (val + " is Not  in the list")
+else:
+    print (val  + " is in the list")
+x=0
