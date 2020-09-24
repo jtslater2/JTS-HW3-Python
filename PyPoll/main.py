@@ -21,10 +21,28 @@ monthlist = []
 candidatelist = []
 uniname = ""
 
+
+# stole this from geeksforgeeks.org
+def check(list1, val): 
+      
+    # traverse in the list 
+    for x in list1: 
+  
+        # compare with all the values 
+        # with val 
+        if val>= x: 
+            return False 
+    return True
+
+
+
+
 poll_csv = os.path.join("Resources", "election_data2.csv")
+
 
 #poll_csv = os.path.join("Resources", "election_data.csv")
 # line should be budget_csv = os.path.join("..", "Resources", "budget_data.csv")
+#with open(poll_csv, "r") as csv_file:
 
 with open(poll_csv, "r") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
