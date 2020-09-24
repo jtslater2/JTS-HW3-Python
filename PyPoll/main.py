@@ -19,7 +19,11 @@ m2mtotal = 0.0
 m2mchange = 0.0
 monthlist = []
 canlist = []
+votelist = []
 uniname = ""
+global votecounter
+
+
 
 
 # stole this from geeksforgeeks.org and modified as needed - checks for name in list - True means it's NOT in the list
@@ -33,6 +37,14 @@ def check_in_list(list1, val):
         if val == x: 
             return False 
     return True
+
+def countvotes(sfile, candname):
+    votecounter = 1
+    for x in sfile:
+        if x == candname:
+            votecounter = votecounter + 1
+    return votecounter
+
 
 
 
@@ -59,6 +71,8 @@ with open(poll_csv, "r") as csv_file:
         print (uniname)
         if (check_in_list(canlist,uniname)):
             canlist.append(uniname)
+        else:
+            votelist.append(uniname)
         #profitlist.append(row[1])
         #monthlist.append(row[0])
         #print(profitlist)
@@ -81,4 +95,18 @@ with open(poll_csv, "r") as csv_file:
     check = input("this is the votecount")
     print (canlist)
     check = input("this is the can list ")
+    print (votelist)
+    check = input("this is the votelist")
+    khancount = countvotes(votelist,"O'Tooley")
+    print (khancount)
+    check = input("this is the Khan votecount")
+
+
+
+
+
+
+
+
 x=0
+
