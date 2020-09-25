@@ -38,13 +38,23 @@ def check_in_list(list1, val):
             return False 
     return True
 
-def countvotes(sfile, candname):
-    votecounter = 1
+def countvotes(sfile, candidate):
+    votecounter = 0
     for x in sfile:
-        if x == candname:
-            votecounter = votecounter + 1
+        if x == candidate:
+            votecounter += 1
     return votecounter
 
+def candstats(candidate):
+    candvotes = 0
+    for x in votelist:
+        if x == candidate:
+            candvotes += 1
+    percentwon = (candvotes/votecount)*100
+    print(f"{each}      :  {percentwon}%  {candvotes}")
+
+
+#print(f"Expert status: {expert_status}")
 
 
 
@@ -68,11 +78,10 @@ with open(poll_csv, "r") as csv_file:
         #totalprofit = totalprofit + float(row[1])
         #print(totalprofit)
         uniname = row[2]
+        votelist.append(uniname)
         print (uniname)
         if (check_in_list(canlist,uniname)):
             canlist.append(uniname)
-        else:
-            votelist.append(uniname)
         #profitlist.append(row[1])
         #monthlist.append(row[0])
         #print(profitlist)
@@ -100,6 +109,15 @@ with open(poll_csv, "r") as csv_file:
     khancount = countvotes(votelist,"O'Tooley")
     print (khancount)
     check = input("this is the Khan votecount")
+    print("Election Results")
+    print("--------------------------")
+    print(f" Total Votes:  " + str(votecount))
+    print("--------------------------")
+    for each in canlist:
+        candstats(each)
+    x=0
+    #for each in canlist
+     #   votecount = countvotes(votelist,str(each))
 
 
 
@@ -109,4 +127,6 @@ with open(poll_csv, "r") as csv_file:
 
 
 x=0
+y=0
+
 
