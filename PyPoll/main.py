@@ -2,12 +2,9 @@ import os
 import csv
 
 votecount = 0
-canlist = []
+candlist = []
 votelist = []
 uniname = ""
-
-
-
 
 # stole this from geeksforgeeks.org and modified as needed - checks for name in list - True means it's NOT in the list
 def check_in_list(list1, val): 
@@ -54,8 +51,8 @@ with open(poll_csv, "r") as csv_file:
         uniname = row[2]
         votelist.append(uniname)
         #print (uniname)
-        if (check_in_list(canlist,uniname)):
-            canlist.append(uniname)
+        if (check_in_list(candlist,uniname)):
+            candlist.append(uniname)
         #profitlist.append(row[1])
         #monthlist.append(row[0])
         #print(profitlist)
@@ -79,7 +76,7 @@ with open(poll_csv, "r") as csv_file:
     print(f" Total Votes:   {votecount}")
     print("-----------------------------------")
     
-    file = open("outfile.txt","w+") 
+    file = open("PyPolloutfile.txt","w+") 
  
     file.write("Election Results\n") 
     file.write("-----------------------------------\n") 
@@ -91,7 +88,7 @@ with open(poll_csv, "r") as csv_file:
 
 
     winnerpercent = 0
-    for each in canlist:
+    for each in candlist:
         candstats(each)
 
     print("-----------------------------------")
