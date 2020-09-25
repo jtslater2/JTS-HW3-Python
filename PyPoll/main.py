@@ -21,7 +21,6 @@ monthlist = []
 canlist = []
 votelist = []
 uniname = ""
-global votecounter
 
 
 
@@ -46,19 +45,25 @@ def countvotes(sfile, candidate):
     return votecounter
 
 def candstats(candidate):
+    global winnerpercent
+    global winner
     candvotes = 0
     for x in votelist:
         if x == candidate:
             candvotes += 1
     percentwon = (candvotes/votecount)*100
-    print(f"{each}      :  {percentwon}%  {candvotes}")
-
+    if percentwon > winnerpercent:
+        winner = candidate
+        winnerpercent = percentwon
+    print(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}")
+    
+    
 
 #print(f"Expert status: {expert_status}")
 
 
 
-poll_csv = os.path.join("Resources", "election_data2.csv")
+poll_csv = os.path.join("Resources", "election_data.csv")
 
 #poll_csv = os.path.join("Resources", "election_data.csv")
 # line should be budget_csv = os.path.join("..", "Resources", "budget_data.csv")
@@ -79,7 +84,7 @@ with open(poll_csv, "r") as csv_file:
         #print(totalprofit)
         uniname = row[2]
         votelist.append(uniname)
-        print (uniname)
+        #print (uniname)
         if (check_in_list(canlist,uniname)):
             canlist.append(uniname)
         #profitlist.append(row[1])
@@ -100,21 +105,24 @@ with open(poll_csv, "r") as csv_file:
          #   print("don't add to list")
         #else:
         #    candidatelist.append(row[2])
-    print (votecount)
-    check = input("this is the votecount")
-    print (canlist)
-    check = input("this is the can list ")
-    print (votelist)
-    check = input("this is the votelist")
-    khancount = countvotes(votelist,"O'Tooley")
-    print (khancount)
-    check = input("this is the Khan votecount")
+    #print (votecount)
+    #check = input("this is the votecount")
+    #print (canlist)
+    #check = input("this is the can list ")
+    #print (votelist)
+    #check = input("this is the votelist")
+    #khancount = countvotes(votelist,"O'Tooley")
+    #print (khancount)
+    #check = input("this is the Khan votecount")
     print("Election Results")
-    print("--------------------------")
-    print(f" Total Votes:  " + str(votecount))
-    print("--------------------------")
+    print("-----------------------------------")
+    print(f" Total Votes:   {votecount}")
+    print("-----------------------------------")
+    winnerpercent = 0
     for each in canlist:
         candstats(each)
+    print("-----------------------------------")
+    print(f"Winner: {winner}")
     x=0
     #for each in canlist
      #   votecount = countvotes(votelist,str(each))
