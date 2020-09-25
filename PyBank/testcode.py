@@ -15,3 +15,12 @@ print ("List index-value are : ")
 for i in range(len(test_list)): 
     print (i, end = " ") 
     print (test_list[i]) 
+
+
+import csv
+
+with open("election_data2.csv", "r") as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=",")
+    csv_header = next(csv_file)
+    #           print(csv_header)
+    #           check = input("this is poll header")
