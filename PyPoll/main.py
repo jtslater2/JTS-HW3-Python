@@ -24,8 +24,6 @@ def check_in_list(list1, val):
 def candstats(candidate):
     global winnerpercent
     global winner
-    global percentwon
-    global candvotes
     candvotes = 0
     for x in votelist:
         if x == candidate:
@@ -36,13 +34,7 @@ def candstats(candidate):
         winnerpercent = percentwon
     print(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}")
     file.write(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}\n")
-    return(percentwon)
-    return(candvotes)
- 
- 
- 
-
-
+     
 
 poll_csv = os.path.join("Resources", "election_data.csv")
 
@@ -102,27 +94,9 @@ with open(poll_csv, "r") as csv_file:
     for each in canlist:
         candstats(each)
 
-    #print(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}")
-    #file.write(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}")
-    #print(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}")
     print("-----------------------------------")
     print(f"Winner: {winner}")
-    #file.write(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}")
+    #Print to file Winner
     file.write("-----------------------------------\n")
     file.write(f"Winner: {winner}")
     
-    x=0
-    #for each in canlist
-     #   votecount = countvotes(votelist,str(each))
-
-
-
-
-
-
-
-
-x=0
-y=0
-
-
