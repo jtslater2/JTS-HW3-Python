@@ -8,6 +8,14 @@ candlist = []
 votelist = []
 uniname = ""
 newlist = []
+emplist = []
+fnlist = []
+lnlist = []
+newdoblist = []
+newssnlist = []
+stateabblist = []
+
+
 
 # stole this from geeksforgeeks.org and modified as needed - checks for name in list - True means it's NOT in the list
 def check_in_list(list1, val): 
@@ -101,8 +109,8 @@ boss_csv = os.path.join("employee_data.csv")
 with open(boss_csv, "r") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     csv_header = next(csv_file)
-    print(csv_header)
-    check = input("this is csv header")
+    #print(csv_header)
+    #check = input("this is csv header")
     #           print(csv_header)
     #           check = input("this is poll header")
     
@@ -112,35 +120,44 @@ with open(boss_csv, "r") as csv_file:
     #check = input("this is new list header")
 
        #csv_writer = csv.writer(newboss, delimiter=",")
+# Specify the file to write to
+    output_path = os.path.join("PyBossoutfile.csv")
 
+    # Open the file using "write" mode. Specify the variable to hold the contents
+    with open(output_path, 'w') as csvfile:
+        # Initialize csv.writer
+        csvwriter = csv.writer(csvfile, delimiter=',')
+
+        # Write the first row (column headers)
+        csvwriter.writerow(["Emp ID", "First Name","Last Name","DOB","SSN","State"])
 
     for row in csv_reader:
-        newlist.append(row[0])
+        emplist.append(row[0])
 
         namesplit = row[1]
         first_last = namesplit.split(" ",1)
-        print(first_last)
-        check = input("first_last  list ")
-        newlist.append(first_last[0])
-        newlist.append(first_last[1])
+        #print(first_last)
+        #check = input("first_last  list ")
+        fnlist.append(first_last[0])
+        lnlist.append(first_last[1])
 
-        print (newlist)
-        check = input("this is new list ")
+        #print (newlist)
+        #check = input("this is new list ")
 
         dob = row[2]
         datelist = dob.split("-")
         #print(datelist)
         #check = input("this is datelist")
         newdob = str(datelist[1])+"-"+str(datelist[2])+"-"+str(datelist[0])
-        print(newdob)
-        check = input("this is new dob")
-        newlist.append(newdob)
+        #print(newdob)
+        #check = input("this is new dob")
+        newdoblist.append(newdob)
 
         ssn = row[3]
         ssnlist = ssn.split("-")
         #print(ssnlist)
         newssn = "***-**-"+str(ssnlist[2])
-        newlist.append(newssn)
+        newssnlist.append(newssn)
         #print(newlist)
 
         staterow = row[4]
@@ -148,35 +165,48 @@ with open(boss_csv, "r") as csv_file:
         
         for key,value in us_state_abbrev.items():
             if key == staterow:
-                print(key)
-                print(staterow)
+                #print(key)
+                #print(staterow)
                 stateabb = value
                 # stateabb = Value
         #print(stateabb)
         #check = input("this is state abb")
-        newlist.append(stateabb)
+        stateabblist.append(stateabb)
 
+    newziplist = zip(emplist, fnlist, lnlist, newdoblist, newssnlist, stateabblist)
         #print(newlist)
         #check = input("this is the list for one pass thru")
+    output_path = os.path.join("PyBossoutfile.csv")
 
-        # Specify the file to write to
-        output_path = os.path.join("PyBossoutfile.csv")
+    with open(output_path, 'w', newline="") as csvfile:
+        # Initialize csv.writer
+        csvwriter = csv.writer(csvfile, delimiter=',')
 
-        # Open the file using "write" mode. Specify the variable to hold the contents
-        with open(output_path, 'w') as csvfile:
+        # Write the new second row
 
-            # Initialize csv.writer
-            csvwriter = csv.writer(csvfile, delimiter=',')
-
-            # Write the first row (column headers)
-            csvwriter.writerow(["Emp ID", "First Name","Last Name","DOB","SSN","State"])
-
-            csv
-
-            # Write the second row
-            csvwriter.writerow([row[0], first_last[0], first_last[1], newdob, newssn, stateabb ])
+        csvwriter.writerow(["Emp ID", "First Name","Last Name","DOB","SSN","State"])
+            
+        csvwriter.writerows(newziplist)
         
-        
+        # Three Lists
+        #indexes = [1, 2, 3, 4]
+        #employees = ["Michael", "Dwight", "Meredith", "Kelly"]
+        #department = ["Boss", "Sales", "Sales", "HR"]
+
+        # Zip all three lists together into tuples
+        #roster = zip(indexes, employees, department)
+
+        # save the output file path
+        #output_file = os.path.join("output.csv")
+
+        # open the output file, create a header row, and then write the zipped object to the csv
+        #with open(output_file, "w") as datafile:
+         #   writer = csv.writer(datafile)
+
+         #   writer.writerow(["Index", "Employee", "Department"])
+
+          #  writer.writerows(roster)
+
         
 
 
