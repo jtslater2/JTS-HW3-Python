@@ -121,15 +121,15 @@ with open(boss_csv, "r") as csv_file:
 
        #csv_writer = csv.writer(newboss, delimiter=",")
 # Specify the file to write to
-    output_path = os.path.join("PyBossoutfile.csv")
+    #output_path = os.path.join("PyBossoutfile.csv")
 
     # Open the file using "write" mode. Specify the variable to hold the contents
-    with open(output_path, 'w') as csvfile:
+    #with open(output_path, 'w') as csvfile:
         # Initialize csv.writer
-        csvwriter = csv.writer(csvfile, delimiter=',')
+        #csvwriter = csv.writer(csvfile, delimiter=',')
 
         # Write the first row (column headers)
-        csvwriter.writerow(["Emp ID", "First Name","Last Name","DOB","SSN","State"])
+        #csvwriter.writerow(["Emp ID", "First Name","Last Name","DOB","SSN","State"])
 
     for row in csv_reader:
         emplist.append(row[0])
@@ -148,7 +148,7 @@ with open(boss_csv, "r") as csv_file:
         datelist = dob.split("-")
         #print(datelist)
         #check = input("this is datelist")
-        newdob = str(datelist[1])+"-"+str(datelist[2])+"-"+str(datelist[0])
+        newdob = str(datelist[1])+"/"+str(datelist[2])+"/"+str(datelist[0])
         #print(newdob)
         #check = input("this is new dob")
         newdoblist.append(newdob)
