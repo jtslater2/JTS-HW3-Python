@@ -1,1 +1,1 @@
-# Rutgers-JTS-HW3-Python-Challenge
+# JTS-HW3-Python
