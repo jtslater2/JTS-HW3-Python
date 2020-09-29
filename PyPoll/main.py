@@ -1,6 +1,7 @@
 import os
 import csv
 
+#variables and lists
 votecount = 0
 candlist = []
 votelist = []
@@ -18,82 +19,72 @@ def check_in_list(list1, val):
             return False 
     return True
 
+#function to calculate candidate votes, percent won, winner, winnerpercent for each individual candidate
 def candstats(candidate):
     global winnerpercent
     global winner
     candvotes = 0
+    #set loop to count votes per candidate
     for x in votelist:
         if x == candidate:
             candvotes += 1
+    #set percent won per candidate
     percentwon = (candvotes/votecount)*100
+    #set winner and percent won
     if percentwon > winnerpercent:
         winner = candidate
         winnerpercent = percentwon
+    #print candidate stats to terminal
     print(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}")
+    
+    #print candidate stats to file
     file.write(f"{each}      \t:{round(percentwon,3)}%\t {candvotes}\n")
      
 
+#Find the relative path, open file and set the header
 poll_csv = os.path.join("Resources", "election_data.csv")
 
 with open(poll_csv, "r") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     csv_header = next(csv_file)
-    #           print(csv_header)
-    #           check = input("this is poll header")
+    
+    #set loop to count votes, create votelist & candidate list
     for row in csv_reader:
         votecount += 1
-        #for uniname in range(len(candidatelist))
-         #   if uniname != 
-        #monthcount += 1   why doesn't this work
-        #print(monthcount)
-        #totalprofit = totalprofit + float(row[1])
-        #print(totalprofit)
+        
+        #create votelist
         uniname = row[2]
         votelist.append(uniname)
-        #print (uniname)
+
+        #checks if candidate is in list if no - Add to list
         if (check_in_list(candlist,uniname)):
             candlist.append(uniname)
-        #profitlist.append(row[1])
-        #monthlist.append(row[0])
-        #print(profitlist)
-        #candidate = csv_file[2]
-        #print(candidate)
-        #print(candidatelist)
-        #check = input("this is candiddate list")
-        #print = (str(row[2])
-         #print(totalprofit)
-        #               remove       profitlist.append(row[1])
-        #               remove       monthlist.append(row[0])
-        #print(profitlist)
-        #check2 =input ("this is cand name currentllist")
-        #check_in_list(candidatelist,row[2])
-            #do nothing
-         #   print("don't add to list")
-        #else:
-        #    candidatelist.append(row[2])
+
+    #Print results to terminal    
     print("Election Results")
     print("-----------------------------------")
     print(f" Total Votes:   {votecount}")
     print("-----------------------------------")
     
+    #create and open .txt file
     file = open("PyPolloutfile.txt","w+") 
- 
+    #print results to .txt file
     file.write("Election Results\n") 
     file.write("-----------------------------------\n") 
     file.write(f" Total Votes:   {votecount}\n")
     file.write("-----------------------------------\n")
-
-
-
-
-
+    
+    #set winner percent 
     winnerpercent = 0
+    
+    #set loop to run thru candidate list and call candstats function
     for each in candlist:
         candstats(each)
 
+    #Print winner to terminal
     print("-----------------------------------")
     print(f"Winner: {winner}")
-    #Print to file Winner
+    #Print winner to .txt file
     file.write("-----------------------------------\n")
     file.write(f"Winner: {winner}")
     
